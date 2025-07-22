@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.x
+  pre_build:
+    commands:
+      - echo "Installing dependencies..."
+      - pip install -r requirements.txt
+  build:
+    commands:
+      - echo "Running tests..."
+      - pytest --junitxml=reports/results.xml --tb=short
+  post_build:
+    commands:
+      - echo "Build completed successfully!"
+artifacts:
+  files: 
+    - '**/*'
+  base-directory: build_output
+reports:
+  pytest_report:
+    files:
+      - reports/results.xml
+    base-directory: reports
+    discard-paths: yes   
