@@ -4,10 +4,12 @@ phases:
   install:
     runtime-versions:
       python: 3.x
-  pre_build:
     commands:
       - echo "Installing dependencies..."
       - pip install -r requirements.txt
+  pre_build:
+    commands:
+      - echo "Preparing for build..."
   build:
     commands:
       - echo "Running tests..."
@@ -18,10 +20,9 @@ phases:
 artifacts:
   files: 
     - '**/*'
-  base-directory: build_output
+  base-directory: .
 reports:
   pytest_report:
     files:
-      - reports/results.xml
-    base-directory: reports
+      - "reports/results.xml"
     discard-paths: yes   
